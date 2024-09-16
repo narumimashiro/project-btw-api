@@ -1,0 +1,22 @@
+{
+  "editor.tabSize": 4,
+  "workbench.editorAssociations": {
+      "*.dll": "default"
+  },
+  "backgroundCover.imagePath": "c:\\Users\\hiros\\OneDrive\\画像\\bkknx1efrqs8n3snzb-1719582708803.jpg",
+  "workbench.colorTheme": "miku",
+  "backgroundCover.opacity": 0.75,
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "black",
+  "python.formatting.blackArgs": ["--line-length", "88"],
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "flake8",
+  "python.linting.flake8Args": ["--max-line-length=88", "--max-blank-lines=1", "--ignore=E203,W503"],
+  "editor.formatOnSave": true,
+  "[python]": {
+      "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+      }
+  }
+}
