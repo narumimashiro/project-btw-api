@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 router = APIRouter()
 
-@router.get('/bangdream_events_info/', tags=['bangdream_events'])
+@router.get('/bangdream_events_info/')
 async def bang_dream_events():
     base_url = "https://bang-dream.com"
     bang_dream_event_base_url = f"{base_url}/events?page={{pageindex}}"
