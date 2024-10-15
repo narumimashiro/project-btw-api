@@ -5,7 +5,7 @@ from .v1.bangdream_live_event import router as bangdream_event_router
 from .v1.google_translation import router as google_translation_router
 from .v1.roshidere_wordlist import router as roshidere_word_list_router
 
-app = FastAPI()
+app = FastAPI(docs_url="/docs")
 
 app.add_middleware(
     CORSMiddleware,
