@@ -5,11 +5,5 @@
       "src": "/(.*)",
       "dest": "/api/main.py"
     }
-  ],
-  "builds": [
-    {
-      "src": "app/main.py",
-      "use": "@vercel/python"
-    }
   ]
 }
