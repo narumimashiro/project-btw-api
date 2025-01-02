@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .v1.bangdream_live_event import router as bangdream_event_router
 from .v1.google_translation import router as google_translation_router
 from .v1.roshidere_wordlist import router as roshidere_word_list_router
+from .v1.todo_webapp import router as todo_webapp_router
 
 app = FastAPI(docs_url="/docs")
 
@@ -22,3 +23,4 @@ app.add_middleware(
 app.include_router(bangdream_event_router, prefix="/api/v1", tags=['bangdream_events'])
 app.include_router(google_translation_router, prefix="/api/v1", tags=['google_translation'])
 app.include_router(roshidere_word_list_router, prefix="/api/v1", tags=['roshidere_wordlist'])
+app.include_router(todo_webapp_router, prefix="/api/v1", tags=['todo_webapp'])

@@ -1,24 +1,10 @@
 from typing import List
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-import os
-import json
-from firebase_admin import credentials, firestore, initialize_app
 from datetime import datetime
+from app.core.firebase_config import db
 
 DB_NAME = 'roshirede_word_list'
-
-# for local
-from dotenv import load_dotenv
-
-env = os.environ.get('ENV', 'development')
-if env == "development":
-    load_dotenv('.env.local')
-fb_config_json = os.getenv('FB_CONFIG_JSON')
-fb_config_json_dict = json.loads(fb_config_json)
-cred = credentials.Certificate(fb_config_json_dict)
-initialize_app(cred)
-db = firestore.client()
 
 router = APIRouter()
 
@@ -38,7 +24,7 @@ class WordListItem(BaseModel):
     registration_date: datetime
 
 @router.post('/wordRegistration/', response_model=WordInfo)
-def word_registration(word: Word):   
+def word_registration(word: Word):
     try:
         now = datetime.now()
         db.collection(DB_NAME).add({
