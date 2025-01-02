@@ -26,13 +26,15 @@ async def bang_dream_events():
                 event_url = item.find('a').get('href')
                 event_title = item.find('p', class_='liveEventListTitle')
                 event_date_place = item.find_all('div', class_='itemInfoColumnData')
-                event_date = event_date_place[0]
-                event_place = event_date_place[1]
+                event_date = event_date_place[0].get_text().strip() if len(event_date_place) > 0 else 'N/A'
+                event_place = event_date_place[1].get_text().strip() if len(event_date_place) > 1 else 'N/A'
+                event_title_text = event_title.get_text().strip() if event_title else 'N/A'
+
                 bang_dream_event_list.append({
-                    "event_url": f'{base_url}{event_url}',
-                    "event_title": event_title.get_text().strip(),
-                    "event_date": event_date.get_text().strip(),
-                    "event_place": event_place.get_text().strip()
+                    "event_url": f'{base_url}{event_url}' if event_url else 'N/A',
+                    "event_title": event_title_text,
+                    "event_date": event_date,
+                    "event_place": event_place
                 })
         else:
             return {"message": "Failed get event information"}
