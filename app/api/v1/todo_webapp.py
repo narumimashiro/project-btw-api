@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
-from app.core.firebase_config import db
+from core.firebase_config import db
 
 # for local
 from dotenv import load_dotenv
