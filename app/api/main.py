@@ -23,4 +23,4 @@ app.add_middleware(
 app.include_router(bangdream_event_router, prefix="/api/v1", tags=['bangdream_events'])
 app.include_router(google_translation_router, prefix="/api/v1", tags=['google_translation'])
 app.include_router(roshidere_word_list_router, prefix="/api/v1", tags=['roshidere_wordlist'])
-# app.include_router(todo_webapp_router, prefix="/api/v1", tags=['todo_webapp'])
+app.include_router(todo_webapp_router, prefix="/api/v1", tags=['todo_webapp'])
