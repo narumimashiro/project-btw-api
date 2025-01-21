@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from datetime import datetime
-from app.api.core.firebase_config import get_firebase_client
+from api.core.firebase_config import get_firebase_client
 
 DB_NAME = 'roshirede_word_list'
 

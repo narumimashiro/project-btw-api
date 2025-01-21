@@ -3,10 +3,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
-from api.core.firebase_config import db
-
-# for local
-from dotenv import load_dotenv
+from api.core.firebase_config import get_firebase_client
 
 router = APIRouter()
 
@@ -40,6 +37,8 @@ class ResRegisterTodoTask(BaseModel):
 def register_todo_task(req: ReqRegisterTodoTask):
     if req.app_type not in APPTYPE_LIST:
         raise HTTPException(status_code=400, detail=f'No such app type: {req.app_type}')
+    
+    db = get_firebase_client()
         
     try:
         now = datetime.now()
@@ -70,6 +69,8 @@ def register_todo_task(req: ReqRegisterTodoTask):
     
 @router.get('/get-todo-task-list/', response_model=List[ResRegisterTodoTask])
 def get_todo_task():
+    db = get_firebase_client()
+
     try:
         docs = db.collection(DB_NAME_COLLABORATION).stream()
 
@@ -90,3 +91,5 @@ def get_todo_task():
         return res_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Server Error: Failed to get task list {str(e)}")
+    
+# @router.post('/delete-todo-task')
