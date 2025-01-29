@@ -2,7 +2,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from datetime import datetime
-from api.core.firebase_config import db
+from api.core.firebase_config import get_firebase_client
 
 DB_NAME = 'roshirede_word_list'
 
@@ -25,6 +25,7 @@ class WordListItem(BaseModel):
 
 @router.post('/wordRegistration/', response_model=WordInfo)
 def word_registration(word: Word):
+    db = get_firebase_client()
     try:
         now = datetime.now()
         db.collection(DB_NAME).add({
@@ -41,6 +42,7 @@ def word_registration(word: Word):
     
 @router.get('/getWordlist/', response_model=List[WordListItem])
 def get_word_list():
+    db = get_firebase_client()
     try:
         docs = db.collection(DB_NAME).stream()
 
