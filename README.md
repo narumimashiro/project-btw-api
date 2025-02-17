@@ -8,6 +8,6 @@ https://github.com/narumimashiro/Next-project-btw
 
 ## Start Uvicorn Server
 
-`uvicorn app.api.main:app --reload`
+`uvicorn api.main:app --reload --env-file api/.env`
 
-`cd app && uvicorn api.main:app --reload`
+`cd app && uvicorn api.main:app --reload --env-file api/.env`
