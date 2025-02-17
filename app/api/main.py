@@ -21,7 +21,7 @@ app = FastAPI(docs_url="/docs")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[allow_origins],
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["X-Custom-Header", "Content-Type"]
