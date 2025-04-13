@@ -91,5 +91,34 @@ def get_todo_task():
         return res_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Server Error: Failed to get task list {str(e)}")
-    
-# @router.post('/delete-todo-task')
+
+class ReqDeleteTodoTask(BaseModel):
+    unique_task_id: List[str]
+
+class ResDeleteTodoTask(BaseModel):
+    success: List[str]
+    failed: List[str]
+
+@router.post('/delete-todo-task', response_model=List[ResDeleteTodoTask])
+def delete_todo_task(req: ReqDeleteTodoTask):
+
+    if not req.unique_task_id:
+        raise HTTPException(status_code=400, detail='No task id provided')
+
+    db = get_firebase_client()
+
+    success_task_ids = []
+    failed_task_ids = []
+
+    for task_id in req.unique_task_id:
+        try:
+            doc_ref = db.collection(DB_NAME_COLLABORATION).document(task_id)
+            doc_ref.delete()
+            success_task_ids.append(task_id)
+        except Exception as e:
+            failed_task_ids.append(task_id)
+
+    return ResDeleteTodoTask(
+        success=success_task_ids,
+        failed=failed_task_ids
+    )
