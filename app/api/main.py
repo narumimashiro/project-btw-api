@@ -5,6 +5,7 @@ import os
 from .v1.bangdream_live_event import router as bangdream_event_router
 from .v1.google_translation import router as google_translation_router
 from .v1.roshidere_wordlist import router as roshidere_word_list_router
+from .v1.local_llm import router as local_llm_router
 from .v1.todo_webapp import router as todo_webapp_router
 from .v1.my_fav_game import router as my_fav_game_router
 
@@ -13,7 +14,8 @@ from dotenv import load_dotenv
 
 env = os.environ.get('ENV', 'development')
 if env == "development":
-    load_dotenv('.env.local')
+    load_dotenv('.env.local', override=True)
+    load_dotenv('.env')
 
 allow_origins = os.getenv('ALLOWED_ORIGINS', '').split(',')
 
@@ -30,5 +32,6 @@ app.add_middleware(
 app.include_router(bangdream_event_router, prefix="/api/v1", tags=['bangdream_events'])
 app.include_router(google_translation_router, prefix="/api/v1", tags=['google_translation'])
 app.include_router(roshidere_word_list_router, prefix="/api/v1", tags=['roshidere_wordlist'])
+app.include_router(local_llm_router, prefix="/api/v1", tags=['local_llm'])
 app.include_router(todo_webapp_router, prefix="/api/v1", tags=['todo_webapp'])
 app.include_router(my_fav_game_router, prefix="/api/v1", tags=['my_fav_game'])
